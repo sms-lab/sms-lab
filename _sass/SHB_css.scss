@@ -75,7 +75,11 @@ th {
   position: relative;
   min-height: 360px;
   overflow: hidden;
-  background-image: url($baseurl + "/images/vibration.png");
+  background-color: #183f5d;
+  background-image:
+    linear-gradient(90deg, rgba(28, 70, 102, 0.72), rgba(38, 94, 103, 0.60)),
+    linear-gradient(180deg, rgba(12, 38, 62, 0.20), rgba(12, 38, 62, 0.42)),
+    url("../images/vibration.png");
   background-size: cover;
   background-position: center;
   color: #ffffff;
@@ -85,9 +89,8 @@ th {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(28, 70, 102, 0.72), rgba(38, 94, 103, 0.60)),
-    linear-gradient(180deg, rgba(12, 38, 62, 0.20), rgba(12, 38, 62, 0.42));
+  background: transparent;
+  pointer-events: none;
 }
 
 .page-hero-banner-content {
