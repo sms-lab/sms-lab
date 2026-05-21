@@ -675,11 +675,13 @@ body > .container-fluid {
 
 <article class="fc-slide">
 <h5><strong>Mantis Shrimp-inspired Ultrafast Energy Transformation for Smart Surveillance</strong> published in <strong><i>Device, 2025, 100903.</i></strong></h5>
+<h5><strong>Selected as Front Cover</strong></h5>
 <img src="{{ '/images/Featured IMAGE-2-Device.jpg' | relative_url }}" class="fc-img" alt="Featured work 2 image">
 </article>
 
 <article class="fc-slide">
-<h5><strong>Origami-TENG for Energy and Information Co-Harvesting</strong> published in <strong><i>Joule, 2026, xxxx.</i></strong></h5>
+<h5><strong>Origami-TENG for Energy and Information Co-Harvesting</strong> published in <strong><i>Joule, 2026, 10(5), 102338.</i></strong></h5>
+<h5><strong>Selected as Front Cover</strong></h5>
 <img src="{{ '/images/Featured IMAGE-3-Joule.jpg' | relative_url }}" class="fc-img" alt="Featured work 3 image">
 </article>
 
