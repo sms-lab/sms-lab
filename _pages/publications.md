@@ -21,10 +21,14 @@ permalink: /publications/
 .doi-link { color: rgb(0,157,255); font-weight: bold; text-decoration: none; }
 .pdf-link { color: rgb(192,0,0); font-weight: bold; text-decoration: none; }
 .si-link { color: rgb(112,48,160); font-weight: bold; text-decoration: none; }
-.pub-entry { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.8rem; }
-.pub-text { flex: 1; min-width: 0; }
-.dim-count { display: flex; align-items: center; flex-shrink: 0; margin-left: 0.8rem; }
-.dim-count .__dimensions_badge_embed__ { display: inline-flex; transform: scale(0.8); transform-origin: center center; }
+.pub-entry { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.8rem; }
+.pub-text { flex: 1 1 0; min-width: 0; }
+.dim-count { display: flex; align-items: flex-start; flex-shrink: 0; margin-left: 0.8rem; padding-top: 0.12rem; }
+.dim-count .__dimensions_badge_embed__ { display: inline-flex; transform-origin: center center; }
+@media (max-width: 767px) {
+  .pub-entry { align-items: stretch; }
+  .dim-count { margin-left: 0; width: 100%; justify-content: flex-start; }
+}
 
 </style>
 ### Journal Articles (Upadated on 2026-04-18)
@@ -35,13 +39,13 @@ permalink: /publications/
 {% assign sorted_articles = site.data[datafile] %}
 {% if sorted_articles %}
 {% assign year = datafile | remove: "article" %}
-#### {{ year }}
+### {{ year }}
 
 {% for item in sorted_articles %}
 <a name="J{{ item.index }}"></a>
 <p class="pub-entry">
   <span class="pub-text"><strong>[J{{ item.index }}]</strong> [{{ item.published }}] {% for author in item.authors %}{% if author == "Hu, Guobiao" %}<strong>{{ author }}</strong>{% else %}{{ author }}{% endif %}{% if forloop.last == false %}, {% endif %}{% endfor %}, “{{ item.title }}”, <strong>{{ item.journal }}</strong>. {% if item.Doi %}<a href="{{ item.Doi }}" class="doi-link" target="_blank" rel="noopener noreferrer">[DOI]</a>{% endif %}{% if item.PDF %} <a href="{{ item.PDF | prepend: site.baseurl }}" class="pdf-link" target="_blank" rel="noopener noreferrer">[PDF]</a>{% endif %}{% if item['Supplementary Information'] %} <a href="{{ item['Supplementary Information'] }}" class="si-link" target="_blank" rel="noopener noreferrer">[SI]</a>{% endif %}</span>
-  <span class="dim-count">{% if item.doi %}<span class="__dimensions_badge_embed__" data-doi="{{ item.doi }}" data-style="small_circle" data-legend="hover-right"></span>{% else %}&nbsp;{% endif %}</span>
+  <span class="dim-count">{% if item.doi %}<span class="__dimensions_badge_embed__" data-doi="{{ item.doi }}" data-style="small_rectangle" data-legend="hover-right"></span>{% else %}&nbsp;{% endif %}</span>
 </p>
 {% endfor %}
 

@@ -6,10 +6,120 @@ permalink: /
 ---
 
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+#homeid {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
 /* ===== Your existing image layout ===== */
 .container {
   text-align: center; /* 使容器内的所有内容居中显示 */
   margin-bottom: 0px; /* 底部空间 */
+}
+.navbar,
+.navbar.sticky-top {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  z-index: 10;
+  padding: 12px 24px !important;
+}
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.navbar-brand-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.7) !important;
+}
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand,
+.navbar-brand-title {
+  color: #ffffff !important;
+  font-size: 1.05rem;
+}
+.page-hero {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('{{ site.url }}{{ site.baseurl }}/images/vibration.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  color: #ffffff;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 23, 82, 0.32), rgba(2, 23, 82, 0.45));
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 980px;
+  padding: 40px 28px;
+  text-align: center;
+}
+.page-hero-logo {
+  display: block;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #a5d8ff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.page-hero-title {
+  margin: 0;
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  line-height: 0.98;
+}
+.page-hero-copy {
+  margin: 24px auto 0;
+  max-width: 760px;
+  font-size: clamp(1rem, 1.15vw, 1.35rem);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.92);
+}
+.page-hero-note {
+  margin-top: 26px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+}
+.welcome-frame {
+  width: 100%;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+}
+.welcome-img {
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
+  display: block;
 }
 .image-item {
   display: inline-block; /* 使图片和文本并排显示，根据内容自动调整宽度 */
@@ -25,13 +135,18 @@ permalink: /
 .featured-carousel {
   position: relative;
   width: 100%;
-  max-width: 100%;
-  margin: 10px auto 16px auto;
+  max-width: 1240px;
+  margin: 28px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .fc-viewport {
   overflow: hidden;
   width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,0.08);
 }
 
 .fc-track {
@@ -43,12 +158,14 @@ permalink: /
 .fc-slide {
   min-width: 100%;
   box-sizing: border-box;
-  padding: 0 6px;
+  padding: 0 10px;
 }
 
 .fc-slide h5 {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111;
 }
 
 .fc-slide p {
@@ -58,67 +175,496 @@ permalink: /
 .fc-img {
   width: 100%;
   height: 500px;
-  object-fit: contain;   /* 不裁剪论文图 */
+  object-fit: contain;
   padding: 8px;
   border-radius: 6px;
 }
 
-
-.fc-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 0;
-  background: rgba(0,0,0,0.45);
-  color: #fff;
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  cursor: pointer;
-  line-height: 38px;
-  font-size: 22px;
-  z-index: 2;
-}
-
-.fc-prev { left: 8px; }
-.fc-next { right: 8px; }
-
-.fc-btn:hover { background: rgba(0,0,0,0.6); }
-
 .fc-dots {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .fc-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.25);
-  border: 0;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
   cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
 }
 
 .fc-dot.is-active {
-  background: rgba(0,0,0,0.65);
+  background: #1a73e8;
+  transform: scale(1.15);
+}
+
+/* Full-screen homepage hero inspired by lab landing pages. */
+.navbar,
+.navbar.sticky-top {
+  position: absolute !important;
+  top: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(92vw, 1320px);
+  min-height: 74px;
+  padding: 10px 44px !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.navbar .container-fluid {
+  align-items: center;
+  gap: 14px;
+}
+.navbar-brand {
+  margin-right: 0;
+  padding: 0;
+  line-height: 1;
+}
+.navbar-brand img {
+  width: 42px;
+  height: 42px;
+}
+.navbar-brand-title {
+  color: #fff !important;
+  flex: 0 1 auto;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.42);
+}
+.navbar-collapse {
+  justify-content: flex-end;
+}
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand {
+  color: #fff !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+.navbar-dark .navbar-nav .nav-link {
+  padding: 0.35rem 0.72rem;
+  font-size: 0.96rem;
+}
+.navbar .navbar-collapse.show,
+.navbar .navbar-collapse.collapsing {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba(4, 21, 38, 0.76);
+  backdrop-filter: blur(8px);
+}
+.page-hero {
+  flex: 0 0 100%;
+  height: 100vh;
+  min-height: 640px;
+  background-size: cover;
+  background-position: center;
+}
+.page-hero::before {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.18) 34%, rgba(0, 0, 0, 0.52) 100%),
+    linear-gradient(90deg, rgba(7, 31, 48, 0.42), rgba(7, 31, 48, 0.12), rgba(7, 31, 48, 0.42));
+}
+.page-hero-inner {
+  max-width: 1080px;
+  padding: 118px 32px 72px;
+}
+.page-hero-logo {
+  margin-bottom: 1.35rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+.page-hero-title {
+  font-size: clamp(2.8rem, 5.7vw, 5.8rem);
+  line-height: 1.04;
+  font-weight: 800;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.48);
+}
+.page-hero-copy {
+  max-width: 840px;
+  font-size: 1.18rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.42);
+}
+.page-hero-note {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.42);
+}
+.home-white {
+  flex: 0 0 100%;
+  position: relative;
+  left: auto;
+  right: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  background: #fff;
+  color: #111;
+  display: block;
+}
+.home-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 64px 24px 18px;
+}
+.home-section-title {
+  margin: 0 0 26px;
+  color: #111;
+  font-size: 2rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: left;
+}
+.news-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 24px 28px;
+  text-align: left;
+}
+.news-section h3 {
+  margin-bottom: 22px;
+}
+.featured-carousel {
+  margin: 0 auto;
+  padding: 0;
+}
+.fc-viewport {
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  border-right: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  border-left: 0;
+}
+.fc-slide {
+  padding: 0;
+}
+.fc-slide h5 {
+  margin: 0 0 18px;
+  font-size: 1.04rem;
+  text-align: left;
+}
+.fc-img {
+  height: min(52vw, 560px);
+  min-height: 340px;
+  border-radius: 0;
+}
+@media (max-width: 767px) {
+  .navbar,
+  .navbar.sticky-top {
+    width: calc(100vw - 24px);
+    min-height: 64px;
+    padding: 10px 18px !important;
+  }
+  .navbar .container-fluid {
+    gap: 10px;
+  }
+  .navbar-brand img {
+    width: 36px;
+    height: 36px;
+  }
+  .navbar-brand-title {
+    max-width: calc(100vw - 150px);
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+  .page-hero {
+    min-height: 620px;
+  }
+  .page-hero-inner {
+    padding: 104px 22px 60px;
+  }
+  .page-hero-logo {
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+  }
+  .page-hero-copy {
+    font-size: 1rem;
+  }
+  .home-section {
+    padding-top: 42px;
+  }
+  .home-section-title {
+    font-size: 1.65rem;
+  }
+  .fc-img {
+    height: 360px;
+    min-height: 300px;
+  }
+}
+
+/* Final homepage layout reset. Keep the hero stable inside Bootstrap rows. */
+body {
+  overflow-x: hidden;
+}
+body > .container-fluid {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.container-fluid > .row {
+  --bs-gutter-x: 0;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+#homeid {
+  display: block !important;
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.navbar,
+.navbar.sticky-top {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  z-index: 50;
+}
+.navbar > .container-fluid {
+  width: min(88vw, 1780px);
+  max-width: none !important;
+  margin: 0 auto;
+  padding: 34px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.navbar-brand {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+.navbar-brand img {
+  width: 58px;
+  height: 58px;
+}
+.navbar-brand-title {
+  flex: 0 0 auto;
+  margin-right: 34px;
+  color: #fff !important;
+  font-size: 1.2rem !important;
+  font-weight: 700;
+  line-height: 1.15;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+.navbar-collapse {
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+.navbar-nav {
+  width: 100%;
+  justify-content: space-between;
+  gap: 18px;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff !important;
+  padding: 0;
+  font-size: 1.24rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+.page-hero {
+  left: auto !important;
+  right: auto !important;
+  width: 100vw !important;
+  height: 100vh;
+  min-height: 720px;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  background-size: cover;
+  background-position: center center;
+}
+.page-hero::before {
+  background:
+    linear-gradient(90deg, rgba(22, 58, 88, 0.72), rgba(24, 76, 90, 0.58)),
+    linear-gradient(180deg, rgba(16, 42, 70, 0.20), rgba(16, 42, 70, 0.50));
+}
+.page-hero-inner {
+  max-width: min(88vw, 1320px);
+  padding: 140px 0 88px;
+}
+.page-hero-title {
+  font-size: clamp(3.2rem, 5.2vw, 5.4rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+.page-hero-copy {
+  max-width: 1180px;
+  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  line-height: 1.55;
+}
+.page-hero-note {
+  margin-top: 74px;
+  font-size: 0.9rem;
+}
+.home-white {
+  width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding: 0;
+  background: #fff;
+}
+.home-section,
+.news-section {
+  width: min(88vw, 1240px);
+  max-width: none;
+  margin: 0 auto;
+}
+.home-section {
+  padding: 68px 0 20px;
+}
+.news-section {
+  padding: 38px 0 36px;
+}
+@media (max-width: 991px) {
+  .navbar > .container-fluid {
+    width: calc(100vw - 32px);
+    padding-top: 18px;
+  }
+  .navbar-brand img {
+    width: 42px;
+    height: 42px;
+  }
+  .navbar-brand-title {
+    max-width: calc(100vw - 150px);
+    margin-right: 0;
+    font-size: 0.92rem !important;
+  }
+  .navbar-nav {
+    gap: 0;
+  }
+  .navbar .navbar-collapse.show,
+  .navbar .navbar-collapse.collapsing {
+    margin-top: 12px;
+    padding: 14px;
+    background: rgba(15, 42, 62, 0.86);
+  }
+  .page-hero {
+    min-height: 640px;
+  }
+  .page-hero-inner {
+    max-width: calc(100vw - 44px);
+    padding: 112px 0 70px;
+  }
+  .home-section,
+  .news-section {
+    width: calc(100vw - 36px);
+  }
+}
+
+/* Keep the shared navbar style on the homepage too. */
+.site-navbar,
+.site-navbar.sticky-top {
+  position: absolute !important;
+  top: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 22px 0 18px !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: none !important;
+  z-index: 50;
+}
+
+.site-navbar > .container-fluid {
+  width: min(92vw, 1480px) !important;
+  max-width: none !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+  gap: 30px;
+}
+
+.site-navbar-logos {
+  gap: 16px;
+}
+
+/* Home navbar logo tuning. Adjust icon size and offset here. */
+.site-navbar-logo-hkust {
+  width: 230px !important;
+  height: 70px !important;
+}
+
+.site-navbar-logo-sms {
+  width: 300px !important;
+  height: 80px !important;
+  transform: translate(8px, 5px) !important;
+}
+
+.site-navbar .navbar-nav {
+  justify-content: flex-end;
+  gap: clamp(16px, 1.6vw, 30px);
+}
+
+.site-navbar .nav-link {
+  padding: 0;
+  font-size: 1.05rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 991px) {
+  .site-navbar > .container-fluid {
+    width: calc(100vw - 32px) !important;
+  }
+
+  .site-navbar-logos {
+    gap: 10px;
+  }
+
+  .site-navbar-logo-hkust {
+    width: 150px !important;
+    height: 48px !important;
+  }
+
+  .site-navbar-logo-sms {
+    width: 104px !important;
+    height: 48px !important;
+    transform: translate(5px, 3px) !important;
+  }
 }
 </style>
 
 
-### Welcome!
-This is Smart Materials & Systems LAB at HKUST(GZ)!
-
-<div class="container">
-<img src="{{ site.url }}{{ site.baseurl }}/images/vibration.png" style="width:100%;" />
+{::nomarkdown}
+<div class="page-hero">
+<div class="page-hero-inner">
+<h1 class="page-hero-title">This is Smart Materials & Systems Lab</h1>
+<p class="page-hero-copy">Using advanced energy harvesting and sensor-integrated materials, we build research platforms that look premium and communicate a strong technical identity.</p>
+<p class="page-hero-note">Join us in advancing sustainable energy and smart sensors.</p>
+</div>
 </div>
 
-### Featured Work
+<main class="home-white">
+<section class="home-section">
+<h2 class="home-section-title">Featured Work</h2>
 
 <div class="featured-carousel" id="featuredCarousel">
-<button class="fc-btn fc-prev" type="button" aria-label="Previous">‹</button>
-
 <div class="fc-viewport">
 <div class="fc-track">
 
@@ -139,8 +685,6 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
 
 </div>
 </div>
-
-<button class="fc-btn fc-next" type="button" aria-label="Next">›</button>
 <div class="fc-dots"></div>
 </div>
 
@@ -151,11 +695,9 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
 
   const track = root.querySelector('.fc-track');
   const slides = Array.from(root.querySelectorAll('.fc-slide'));
-  const prevBtn = root.querySelector('.fc-prev');
-  const nextBtn = root.querySelector('.fc-next');
   const dotsWrap = root.querySelector('.fc-dots');
 
-  if (!track || slides.length < 2 || !prevBtn || !nextBtn || !dotsWrap) return;
+  if (!track || slides.length < 2 || !dotsWrap) return;
 
   let idx = 0;
   let timer = null;
@@ -184,8 +726,6 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
   }
 
   function next(userAction) { go(idx + 1, userAction); }
-  function prev(userAction) { go(idx - 1, userAction); }
-
   function start() {
     stop();
     timer = setInterval(() => next(false), INTERVAL_MS);
@@ -197,16 +737,6 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
   }
 
   function restart() { start(); }
-
-  prevBtn.addEventListener('click', () => prev(true));
-  nextBtn.addEventListener('click', () => next(true));
-
-  // Keyboard support (optional)
-  root.setAttribute('tabindex', '0');
-  root.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(true); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); next(true); }
-  });
 
   // Pause on hover (optional)
   root.addEventListener('mouseenter', stop);
@@ -220,7 +750,11 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
 
 
 
-### News
+</section>
+{:/nomarkdown}
+
+<section class="news-section">
+<h3>News</h3>
 
 ##### <u>2026.03.14</u> [<strong>Congrats to Yawei! His 2nd journal paper has been published in Joule.</strong>](https://www.cell.com/joule/fulltext/S2542-4351(26)00022-X)
 ##### <u>2025.06.17</u> <strong>Congrats to Yihao on receiving the CSC scholarship!
@@ -234,3 +768,7 @@ This is Smart Materials & Systems LAB at HKUST(GZ)!
 ##### <u>2023.10.17</u> [<strong>恭喜胡国标教授入选全球前2%顶尖科学家榜单!</strong>](https://mp.weixin.qq.com/s/aExUrw_RwpVU2Qq1FI6xxg)
 ##### <u>2023.09.21</u> [<strong>恭喜胡国标教授荣获ASME-SMASIS 2023最佳论文奖!</strong>](https://mp.weixin.qq.com/s/1lwVYDcNj-gWKcWwkpmNmg?poc_token=HENwrGajkJ-Tw9AO9yY3ANeL0NhV6e-b0xyFLRa9)
 
+</section>
+{::nomarkdown}
+</main>
+{:/nomarkdown}

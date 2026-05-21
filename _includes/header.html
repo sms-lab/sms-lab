@@ -3,17 +3,12 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark site-navbar">
     <div class="container-fluid">
-        <!-- Logo and title container -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ site.url }}{{ site.baseurl }}/">
-                <img src="{{ site.url }}{{ site.baseurl }}/favicon.ico" width="50" height="50" class="d-inline-block align-top" alt="">
-            </a>
-        </div>
-        <div class="navbar-brand-title">
-            {{ site.title | escape }}
-        </div>
+        <a class="navbar-brand site-navbar-logos" href="{{ site.url }}{{ site.baseurl }}/" aria-label="{{ site.title | escape }}">
+            <img src="{{ '/images/Icons/hkust-gz.svg' | relative_url }}" class="site-navbar-logo site-navbar-logo-hkust" alt="HKUST Guangzhou">
+            <img src="{{ '/images/Icons/SMS-LAB.svg' | relative_url }}" class="site-navbar-logo site-navbar-logo-sms" alt="Smart Materials and Systems Lab">
+        </a>
 
         <!-- Toggler button -->
         <button class="toggler navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
